@@ -1,0 +1,369 @@
+/* -- 实验室页面 wrap -- */
+.lewrap {
+	display: flex;
+	height: 100%;
+}
+.lewrap .menu {
+	flex: 0 0 12%;
+	padding: 5px 5px 5px 1em;
+	border-right: 1px solid #ddd;
+}
+.lewrap .menu a {
+	display: block;
+	line-height: 26px;
+}
+.lewrap .cont {
+	flex: 1 1 auto;
+	padding: 10px;
+}
+/*-----复选框：<input type="checkbox" class="mC1" />-----*/
+.mC1 {
+	position: relative;
+	display: inline-block;
+	width: 50px; height: 30px;
+	border: none;	/*---防止出现边框---*/
+	background-color: transparent;	/*---防止出现黑色背景---*/
+	-webkit-appearance: none;	/*---清除默认样式---*/
+    -moz-appearance: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);			/*---防止点击出现闪烁---*/
+}
+.mC1::before {
+	content: '';
+	display: inline-block;
+	width: calc(100% - 2px); height: calc(100% - 2px);
+	border: 1px solid #ddd;
+	border-radius: 15px;
+	box-shadow: #dfdfdf 0 0 0 0 inset;
+	transition: box-shadow .4s;
+	-webkit-transition: box-shadow .4s;
+}
+.mC1:checked::before {
+	box-shadow: #64bd63 0 0 0 16px inset;
+	background-color: #64bd63;
+	transition: border .4s,box-shadow .4s,background-color 1.2s;
+	-webkit-transition: border .4s,box-shadow .4s,background-color 1.2s;
+}
+.mC1::after {
+	content: '';
+	position: absolute;
+	left: 1px; top: 2px;
+	width: 24px; height: calc(100% - 6px);
+	border: 1px solid #eee;
+	border-radius: 50%;
+	box-shadow: 0 1px 3px rgba(0,0,0,.4);
+	background-color: #fff;
+	transition: left .2s;
+	-webkit-transition: left .2s;
+	cursor: pointer;
+}
+.mC1:checked::after {
+	left: 22px;
+}
+/*-----复选框：<input type="checkbox" class="mC2" />-----*/
+.mC2 {
+	position: relative;
+    display: inline-block;
+    width: 30px; height: 30px;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 1px 1px 10px 0 rgba(0,0,0,0.3) inset;
+    border-radius: 5px;
+    background: transparent;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.mC2:checked::after {
+    content: '';
+    position: absolute;
+    width: 14px; height: 7px;
+    top: 6px; left: 6px;
+    border: 4px solid #E14149;
+    border-top: none; border-right: none;
+    border-radius: 2px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+}
+.mC2:disabled {
+	background-color: #ddd;
+	cursor: default;
+}
+/*---mC2的大小修改---*/
+.mC2 { width: 24px; height: 24px;  }
+.mC2:checked::after {
+	width: 14px; height: 7px;
+    top: 4px; left: 4px;
+    border-width: 2px;
+    border-color: #E14149;
+}
+/*-----单选框：<input type="radio" name="" class="mR2" />-----*/
+.mR2 {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 4px auto;
+	width: 20px; height: 20px;
+	border-radius: 12px;
+	cursor: pointer;
+	box-shadow: inset 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
+	background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTMzMDAyOTg4NzAyIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM0NzciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PGRlZnM+PHN0eWxlIHR5cGU9InRleHQvY3NzIj48L3N0eWxlPjwvZGVmcz48cGF0aCBkPSJNMTAyNCAxNjIuNCAzNzYuMDY0IDg4My4wMDhsLTMwLjYyNC0zMC40NjQgMCAwTDAgNTE1LjY4bDMyLjMyLTMxLjcxMkwzNzUuNjggODE4Ljc1Mmw2MTYtNjg4LjAzMkwxMDI0IDE2Mi40eiIgcC1pZD0iMzQ3OCIgZGF0YS1zcG0tYW5jaG9yLWlkPSJhMzEzeC43NzgxMDY5LjAuaTQiIGNsYXNzPSJzZWxlY3RlZCIgZmlsbD0iI2ZmZmZmZiI+PC9wYXRoPjwvc3ZnPg==') center/14px no-repeat #ddd;
+	
+	-webkit-appearance: none; /* remove default */
+	-moz-appearance: none;
+}
+.mR2:checked {
+	background-color: #E14A4C;
+}
+.mR2:active {
+	transform: scale(1.2);
+}
+
+/* ---------- 按钮 ---------- */
+.allbtn {
+	display: block;
+	line-height: 40px;
+	text-align: center;
+	width: 100%;
+	max-width: 340px;
+	margin:  15px auto 10px;
+	font-size: 14px;
+	font-family: 'Source Han Sans CN';
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	background-color: #aaa;
+	transition: all 200ms linear;
+}
+.allbtn.okay {
+	background-color: dodgerblue;
+}
+.allbtn.ing {
+	background-color: #aaa;
+}
+.allbtn.ing::before {
+	content: '';
+	display: inline-block;
+	vertical-align: sub;
+	margin-right: 4px;
+	width: 14px; height: 14px;
+	border: 2px solid transparent;
+    border-left: 2px solid #fff;
+	border-radius: 50%;
+	transition: none;
+    animation: rotation infinite linear 0.5s;
+    -webkit-animation: rotation infinite linear 0.5s;
+}
+@keyframes rotation {
+	0% { transform: rotateZ(0deg); }
+	100% { transform: rotateZ(360deg); }
+}
+
+/* ---------- mbbar ---------- */
+.mbbar {
+	background-color: transparent;
+}
+.mbbar li,
+.mbbar label,
+.mbbar > a {
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+	line-height: 1;
+	color: #333;
+	overflow: hidden;
+}
+.mbbar[full] li,
+.mbbar[full] label,
+.mbbar[full] > a {
+	padding: 0 10px;
+	margin: 0;
+}
+.mbbar li:not(:last-child),
+.mbbar label:not(:last-child),
+.mbbar > a:not(:last-child) {
+	border-bottom: 1px solid #ddd;
+}
+.mbbar li[pro] {	/*--用来写描述文字的li--*/
+	height: initial;
+	margin: 0;
+	border-top: 1px solid #eee;
+	line-height: 22px;
+	padding: 8px 10px 15px;
+	color: #666;
+	background-color: #F0F0F0;
+}
+.mbbar li[pro] i {
+	line-height: inherit;
+	margin-right: 4px;
+}
+.mbbar li[pro] {
+	border-bottom: none;
+}
+
+.mbbar li.error,
+.mbbar li.error i,
+.mbbar li.error input {
+	color: #EC7272;
+	border-color: #EC7272;
+	/* background-color: #FFB6C1; */
+}
+.mbbar input[type='text'],
+.mbbar input[type='tel'],
+.mbbar input[type='number'],
+.mbbar input[type='email'],
+.mbbar input[type='password'] {
+	width: 100%; height: 90%;
+	border: none;
+	outline: none;
+}
+.mbbar select {
+	border: none;
+	line-height: 30px;
+	text-align: right;
+	padding: 0 10px 0 10px;
+	background-repeat: no-repeat;
+	background-size: 16px;
+	background-position: right -5px center;
+	background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTMyOTUzMDUxNTg2IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjMwNDkiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCI+PGRlZnM+PHN0eWxlIHR5cGU9InRleHQvY3NzIj48L3N0eWxlPjwvZGVmcz48cGF0aCBkPSIiIHAtaWQ9IjMwNTAiPjwvcGF0aD48cGF0aCBkPSJNNjc3LjQ3OCA1MDUuNTQ5bC0zNjkuNzY2IDM4MC44MjZjLTcuMDY2IDcuMjctNi44NjEgMTkuMDQ2IDAuNDEgMjYuMTEybDAuNDEgMC40MWM3LjI3IDcuMDY2IDE5LjA0NiA2Ljg2MSAyNi4xMTItMC40MWwzOTUuNDY5LTQwNy4zNDctMzk1LjQ2OS0zOTUuNDY5Yy03LjE2OC03LjE2OC0xOC45NDQtNy4xNjgtMjYuMTEyIDBsLTAuNDEgMC40MWMtNy4xNjggNy4xNjgtNy4xNjggMTguOTQ0IDAgMjYuMTEybDM2OS4zNTcgMzY5LjM1N3oiIHAtaWQ9IjMwNTEiPjwvcGF0aD48L3N2Zz4=');
+	background-color: #fff;
+}
+
+.mbbar li > div,
+.mbbar label > div,
+.mbbar > a > div {
+	display: flex;
+	align-items: center;
+	min-height: 40px;
+}
+
+/* ----- div - 1，一般是图标或标题 ----- */
+.mbbar li > div:nth-child(1),
+.mbbar > a > div:nth-child(1),
+.mbbar > label > div:nth-child(1) {
+	flex: 0 0 auto;
+}
+.mbbar [tit], .mbbar [icon] {
+	padding-right: 10px;
+}
+.mbbar [tit] i {
+	margin-right: 6px;
+}
+.mbbar [tit] i, .mbbar [icon] i {
+	position: relative; top: 1px;
+	display: inline-block;
+	line-height: 1;
+	font-size: 20px;
+	width: 20px; height: 20px;
+}
+
+/* ----- div - 2 一般是文字内容 ----- */
+.mbbar li > div:nth-child(2),
+.mbbar label > div:nth-child(2),
+.mbbar > a > div:nth-child(2) {
+	flex: 1 1 auto;
+}
+.mbbar li [des],	/*-- 第二个 div 的 des 内容一般是设置值的展示，灰色小字，右对齐 --*/
+.mbbar label [des],
+.mbbar > a [des] {
+	justify-content: flex-end;
+	font-size: 12px;
+	color: #999;
+}
+.mbbar li [cont],	/*-- 第二个 div 的 cont 内容一般是数据值(如余额)的展示，正文正常字号，左对齐 --*/
+.mbbar label [cont],
+.mbbar > a [cont] {
+}
+
+/* ----- div - 3 向右的符号/按钮----- */
+.mbbar li > div:nth-child(3),
+.mbbar label > div:nth-child(3),
+.mbbar > a div:nth-child(3) {
+	flex: 0 0 auto;
+}
+.mbbar li > div:nth-child(3) i,		/*-- 第三个 div 的 i 一般是表示超链接的右箭头 --*/
+.mbbar label > div:nth-child(3) i,
+.mbbar > a div:nth-child(3) i {
+	position: relative; top: 1px;
+	display: inline-block;
+	line-height: 1;
+	font-size: 16px;
+	width: 16px; height: 16px;
+	color: #999;
+}
+.mbbar li > [tip],		/*-- 第三个 div 的 tip 右箭头左边的说明文字，和上面 des 差不多 --*/
+.mbbar label > [tip],
+.mbbar > a [tip] {
+	font-size: 12px;
+	color: #999;
+}
+.mbbar li > [btn],		/*-- 第三个 div 的 btn 是操作按钮，如获取验证码 --*/
+.mbbar label > [btn],
+.mbbar > a [btn] {
+	padding: 0 5px 0 10px;
+	color: #15A2DE;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/* ----- div - 4 一般是第二行的说明文字----- */
+.mbbar li > div:nth-child(4),
+.mbbar label > div:nth-child(4),
+.mbbar > a div:nth-child(4) {
+	flex: 1 1 100%;
+	font-size: 12px;
+	color: #999;
+	padding: 5px 0;
+	box-sizing: border-box;
+	line-height: 1.4;
+	border-top: 1px solid #eee;
+}
+
+/* ----- 底部滑出提示 ----- */
+.allHints {
+	display: none;
+	position: fixed;
+	z-index: 99;
+	left: 5%;bottom: 18vh;width: 90%;
+	text-align: center;
+	animation: showHints 1500ms ease-out forwards;
+	-webkit-animation: showHints 1500ms ease-out forwards;
+}
+.allHints span {
+	display: inline-block;
+	line-height: 16px;
+	padding: 10px 20px;
+	text-align: left;
+	font-size: 12px;
+	border-radius: 5px;
+	color: #f9f9f9;
+	background-color: rgba(0,0,0,0.6);
+}
+@keyframes showHints{
+	0% {opacity: 0.5;transform: scale(1.5);}
+	20% {opacity: 1;transform: scale(1);}
+	80% {opacity: 1;transform: scale(1);}
+	100% {opacity: 0;transform: scale(1);}
+}
+@-webkit-keyframes showHints{
+	0% {opacity: 0.6;-webkit-transform: scale(1.3);}
+	20% {opacity: 1;-webkit-transform: scale(1);}
+	80% {opacity: 1;-webkit-transform: scale(1);}
+	100% {opacity: 0;-webkit-transform: scale(1);}
+}
+.allHints[slide] {
+	bottom: -40px;
+	animation: speedHints 1500ms linear forwards;
+	-webkit-animation: speedHints 1500ms linear forwards;
+
+}
+@keyframes speedHints{
+	0% {bottom: 50px;opacity: 0;}
+	15% {bottom: 55px;opacity: 1;}
+	85% {bottom: 55px;opacity: 1;}
+	100% {bottom: 40px;opacity: 0;}
+}
+@-webkit-keyframes speedHints{
+	0% {bottom: 50px;opacity: 0;}
+	15% {bottom: 55px;opacity: 1;}
+	85% {bottom: 55px;opacity: 1;}
+	100% {bottom: 40px;opacity: 0;}
+}
