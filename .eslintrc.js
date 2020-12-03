@@ -39,6 +39,7 @@ module.exports = {
     "object-property-newline": [0],     // 取消强制将对象的属性放在不同的行上
     "no-trailing-spaces": [0],          // 取消不允许使用尾随空间
     "one-var": [0],                     // 不再强制变量必须一起或分开声明
-    "no-new": "off"                     // 不再禁止使用 new
+    "no-new": "off",                    // 不再禁止使用 new
+    "eqeqeq": "off"                     // 不强制要求使用全等于
   }
 }
