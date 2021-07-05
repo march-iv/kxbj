@@ -123,3 +123,113 @@ if (!Array.prototype.find) {
     }
   });
 }
+
+// Object.values 是 ES6 添加的方法，如果浏览器还未支持此方法，可以使用下面的方式来让浏览器支持
+if (!Object.values) Object.values = function(obj) {
+    if (obj !== Object(obj))
+        throw new TypeError('Object.values called on a non-object');
+    var val=[],key;
+    for (key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj,key)) {
+            val.push(obj[key]);
+        }
+    }
+    return val;
+}
+
+// Object.keys 是 ES6 添加的方法，如果浏览器还未支持此方法，可以使用下面的方式来让浏览器支持
+if (!Object.keys) {
+  Object.keys = (function () {
+    var hasOwnProperty = Object.prototype.hasOwnProperty,
+        hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
+        dontEnums = [
+          'toString',
+          'toLocaleString',
+          'valueOf',
+          'hasOwnProperty',
+          'isPrototypeOf',
+          'propertyIsEnumerable',
+          'constructor'
+        ],
+        dontEnumsLength = dontEnums.length;
+
+    return function (obj) {
+      if (typeof obj !== 'object' && typeof obj !== 'function' || obj === null) throw new TypeError('Object.keys called on non-object');
+
+      var result = [];
+
+      for (var prop in obj) {
+        if (hasOwnProperty.call(obj, prop)) result.push(prop);
+      }
+
+      if (hasDontEnumBug) {
+        for (var i=0; i < dontEnumsLength; i++) {
+          if (hasOwnProperty.call(obj, dontEnums[i])) result.push(dontEnums[i]);
+        }
+      }
+      return result;
+    }
+  })()
+};
+
+// 如果浏览器还未支持 Object.assign，可以使用下面的方式来让浏览器支持
+// 但是这个 polyfill 不支持 symbol 属性, 由于 ES5 中本来就不存在 symbols 
+if (typeof Object.assign !== 'function') {
+  // Must be writable: true, enumerable: false, configurable: true
+  Object.defineProperty(Object, "assign", {
+    value: function assign(target, varArgs) { // .length of function is 2
+      'use strict';
+      if (target === null || target === undefined) {
+        throw new TypeError('Cannot convert undefined or null to object');
+      }
+
+      var to = Object(target);
+
+      for (var index = 1; index < arguments.length; index++) {
+        var nextSource = arguments[index];
+
+        if (nextSource !== null && nextSource !== undefined) {
+          for (var nextKey in nextSource) {
+            // Avoid bugs when hasOwnProperty is shadowed
+            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+              to[nextKey] = nextSource[nextKey];
+            }
+          }
+        }
+      }
+      return to;
+    },
+    writable: true,
+    configurable: true
+  });
+}
+
+// 如果浏览器还未支持 Object.create，可以使用下面的方式来让浏览器支持
+if (typeof Object.create !== "function") {
+    Object.create = function (proto, propertiesObject) {
+        if (typeof proto !== 'object' && typeof proto !== 'function') {
+            throw new TypeError('Object prototype may only be an Object: ' + proto);
+        } else if (proto === null) {
+            throw new Error("This browser's implementation of Object.create is a shim and doesn't support 'null' as the first argument.");
+        }
+
+        if (typeof propertiesObject !== 'undefined') throw new Error("This browser's implementation of Object.create is a shim and doesn't support a second argument.");
+
+        function F() {}
+        F.prototype = proto;
+
+        return new F();
+    };
+}
+
+// 如果浏览器还未支持 Object.create，可以使用下面的方式来让浏览器支持(不考虑任何的IE)
+if (!Object.entries)
+  Object.entries = function( obj ){
+    var ownProps = Object.keys( obj ),
+        i = ownProps.length,
+        resArray = new Array(i); // preallocate the Array
+    while (i--)
+      resArray[i] = [ownProps[i], obj[ownProps[i]]];
+
+    return resArray;
+  };

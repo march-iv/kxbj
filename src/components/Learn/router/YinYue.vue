@@ -10,7 +10,7 @@ export default {
 		return { }
 	},
 	created () {
-		console.log(this.$route.params.musicName)
+		console.log(this.$route.params)
 	}
 }
 </script>

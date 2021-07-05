@@ -4,6 +4,54 @@ Array.unique = function () {}
 // 对象合并
 Object.extend = function () {}
 
+// 内置的 Object.assign 无法合并访问器属性，可使用下面的方法代替
+// assignAll 为直接挂在 Object 构造器函数上的，因此要通过构造器调用
+// 举例: Object.assignAll(obj)
+Object.assignAll = function (target, ...sources) { // 参数分别是目标对象，源对象
+	sources.forEach(item => {	// 遍历每个源对象
+		let des = Object.keys(item).reduce((hz, currkey, idx, arr) => { // 遍历源对象的每个key
+			hz[currkey] = Object.getOwnPropertyDescriptor(item, currkey) // 收集源对象属性描述符
+			return hz
+		}, {})
+
+		// Object.assign 默认是会拷贝 Symbol 属性的
+		// 但上面 Object.keys 无法返回 Symbol 属性，所以上面收集到的属性不包括源对象可能含有的 Symbol 属性
+		// 使用 getOwnPropertySymbols 来获取源对象上的 Symbol 属性
+		Object.getOwnPropertySymbols(item).forEach(sym => {	// 循环Symbol属性，因为可能有多个
+			des[sym] = Object.getOwnPropertyDescriptor(item, sym) // 获取Symbol属性的描述符
+		})
+
+		Object.defineProperties(target, des) // 将收集到的源对象的属性及其配置设置到目标对象 target 上
+	})
+	return target
+}
+
+// 对象深拷贝
+// 使用举例： let newobj = obj.deepClone(), newobj 是 obj 的深拷贝
+// 使用 defineProperty 使得此属性为不可枚举的属性
+// 如果是直接挂在 Object.prototype 上，则为可枚举属性，对于 Vue Router 的项目，会把函数体直接拼在URL上
+Object.defineProperty(Object.prototype, 'deepClone', {
+	// configurable: false,	// 默认就是false
+	// writable: false,		// 默认就是false
+	value: function () {
+		var that = this	// this 指向调用当前函数的对象实例
+		var tar = Object.prototype.toString.call(that) === "[object Array]" ? [] : {}	// 创建一个空对象或空数组
+		// var tar = new that.constructor()	// 也可以这样，等同于上一句
+
+		for(let key in that) {
+			if(that.hasOwnProperty(key)) {	// 判断 key 是对象的自身属性，非继承
+				if(typeof that[key] === "object" && that[key] !== null) {	// 判断 key 的值是一个对象，非原始值
+					tar[key] = Object.prototype.toString.call(that[key]) === '[object Array]' ? [] : {}	 // 创建内部的空对象或空数组
+					tar[key] = that[key].deepClone()
+				} else {
+					tar[key] = that[key]	// 赋值
+				}
+			}
+		}
+		return tar
+	}
+})
+
 // 防抖函数
 // func-执行的函数表达式(非函数声明)名称, scope-多长时间内不允许触发函数, arg-传递给要执行函数的参数
 // func 函数内, 第1个参数为传递过来的参数, this 指向事件对象
@@ -56,7 +104,7 @@ Function.throttle = (func, delay, arg) => {
 
 // 日期格式字符串转日期对象
 // 如: Date.toDate("2020-06-11");	Date.toDate("2020/06/11 20:30:20");
-Date.toDate = function (arg) {
+Date.prototype.toDate = function (arg) {
 	if(!arg) return new Date()
 	let str = arg.replace(/-/g, '/') // 用来兼容 IE9
 	return new Date(str)
@@ -112,7 +160,7 @@ Date.prototype.formatIntl = function (time) {
 
 // 一个日期若干天前/后
 // 例+5天: Date.addSub('2020-6-28', 5 * 24 * 3600 * 1000, 'yyyy-MM-dd hh:mm:ss')
-Date.addSub = function (now, how, format) {
+Date.prototype.addSub = function (now, how, format) {
 	let msec = Date.toDate(now).getTime()
 	let nd = new Date(msec + how) // 加上指定时间(秒), 然后转回日期对象
 	return nd.formatReg(format)

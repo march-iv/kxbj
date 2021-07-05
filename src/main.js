@@ -52,6 +52,6 @@ new Vue({
   el: '#app',
   router,
   store,
-  components: { App },  // 注册引入的组件App
-  template: '<App/>'    // 是<App></App>的缩写，意思就是把引入的App.vue渲染到el对应的元素里，这里是#app
+  components: { App },  // 注册引入的组件 App
+  template: '<App/>'    // 是 <App></App> 的缩写，意思就是把引入的 App.vue 渲染到 el 对应的元素里，这里是 #app
 })

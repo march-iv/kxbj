@@ -36,7 +36,6 @@
 			    <div class="swiper-button-prev"></div>
 		    </template>
 		</div>
-
 	</div>
 </template>
 
@@ -47,15 +46,15 @@ import 'swiper/dist/css/swiper.css'
 
 export default {
 	props: {
-		usetype: {
+		usetype: {	// 轮播类型（必须）
 			type: String,
 			default: 'solt'
 		},
-		items: {	// slide 列表
+		items: {	// 轮播 slide 列表（必须）
 			type: Array,
 			default: () => []
 		},
-		amend: {	// 接收的配置参数
+		amend: {	// 接收的配置参数（可选）
 			type: Object,
 			default: () => {}
 		},
@@ -88,7 +87,7 @@ export default {
 	},
 	created: function () {
 		// 合并对象，调用时修改配置参参数
-		// 因为使用扩展运算符合并对象不能实现深层扩展，因此我们使用 extend 包
+		// 因为使用扩展运算符合并对象不能实现深层拷贝，因此我们使用 extend 包
 		// this.options = {...this.options, ...this.amend}
 		this.options = Extend(true, this.options, this.amend)
 	},

@@ -95,8 +95,18 @@ let routerInstance = new Router({
                     component: () => import('@/components/Learn/vue/ABC'),
                     children: [
                         {
-                            path: 'slot', alias: "",
+                            path: 'slot', alias: "",    // slot 插槽
+                            name: 'slot',
                             component: () => import('@/components/Learn/vue/slots')
+                        }, {
+                            path: 'data',       // 数据
+                            component: () => import('@/components/Learn/vue/data')
+                        }, {
+                            path: 'computed',   // 计算属性
+                            component: () => import('@/components/Learn/vue/computed')
+                        }, {
+                            path: 'watch',      // 侦听属性
+                            component: () => import('@/components/Learn/vue/watch') 
                         }
                     ]
                 },
@@ -147,6 +157,7 @@ let routerInstance = new Router({
                             }]
                         }, {
                             path: 'music/:musicName',
+                            name: 'yinyue',
                             component: () => import('@/components/Learn/router/YinYue')
                         }
                     ]

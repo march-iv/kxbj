@@ -60,8 +60,14 @@ export default {
 		// 动态路由
 		music () {
 			if (event.target.value) {
-				// this.$router.push({name: 'yinyue', params: {music: event.target.value}})
-				this.$router.push('/learn/router/music/' + event.target.value)
+				this.$router.push({
+					name: 'yinyue',
+					params: {
+						musicName: event.target.value,
+						id: 3099
+					}
+				})
+				// this.$router.push('/learn/router/music/' + event.target.value)
 			}
 		},
 

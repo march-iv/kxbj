@@ -12,7 +12,7 @@ export default {
 		return http.get('https://api.apiopen.top/getWangYiNews', {
 			params: params,
 			headers,
-			responseType: 'blob'
+			responseType: 'json'
 		})
 	},
 	getImages (params) {	// 美图推荐, 参数: { page: 2, count: 10}

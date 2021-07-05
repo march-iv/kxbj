@@ -4,6 +4,11 @@
 		<p>使用 async ：<span @click="getTopics">主题首页</span></p>
 		<p>多个并发请求：<span @click="bingfa">图片和天气</span></p>
 		<p>取消请求：<span @click="shili">axios 实例</span></p>
+
+		<br><hr><br>
+		<ul>
+			<li v-for="(item, idx) of news" :key="idx">{{item.title}}</li>
+		</ul>
 	</div>
 </template>
 
@@ -13,14 +18,21 @@ import axios from "axios"
 import qs from "qs"
 
 export default {
-	data () { return {} },
+	data () {
+		return {
+			news: []
+		}
+	},
 	methods: {
 		// 基本操作: 获取网易新闻
 		getNews () {
 			let url = 'https://api.apiopen.top/getWangYiNews'
 			let params = {page: 2, count: 8}
 
-			mediaService.getWangYiNews(params).then((res) => {})
+			mediaService.getWangYiNews(params).then((res) => {
+				console.log('res', res)
+				this.news = res
+			})
 
 			// axios.get(url, {params})
 			// axios.get(url + '?' + qs.stringify(params))

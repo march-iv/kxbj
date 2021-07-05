@@ -1,14 +1,12 @@
 <template>
-	<div>slot演示</div>
+	<div></div>
 </template>
 
 <script>
 export default {
-	name: 'slots',
+	name: "watch.vue",
 	data () {
 		return {}
-	},
-	mounted () {
 	}
 }
 </script>

@@ -2,6 +2,9 @@
 	<div class="lewrap">
 		<div class="menu" id="vueMenu">
 			<router-link to="/learn/vue/slot" style="color: red">slot</router-link>
+			<router-link to="/learn/vue/data">data</router-link>
+			<router-link to="/learn/vue/computed">computed</router-link>
+			<router-link to="/learn/vue/watch">watch</router-link>
 		</div>
 		<div class="cont"><router-view/></div>
 	</div>
